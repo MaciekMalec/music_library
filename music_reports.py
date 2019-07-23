@@ -64,15 +64,16 @@ def get_albums_by_title(albums, title):
             list_of_albums.append(album)
     return list_of_albums 
 
-# CZAS JESZCZE NIE DZIAŁA :)
-def get_albums_by_time(albums, time):
+def get_albums_by_time(albums, timemin, timemax):
     list_of_albums = []
     second_list = []
-
+    min=int(timemin)
+    max=int(timemax)
     for album in albums:
-        artist_of_album = album[LEN_OF_ALBUM]
-        second_list.append(artist_of_album)
-        if artist_of_album == time:
+        album_len = album[LEN_OF_ALBUM]
+        minutes = int(album_len.split(':')[0])
+        second_list.append(album_len)
+        if minutes > min and minutes < max: #z zakresu
             list_of_albums.append(album)
     return list_of_albums 
 
@@ -85,7 +86,7 @@ def get_albums_by_time(albums, time):
 # print(get_albums_by_genre(DATA, 'pop'))
 # print(get_albums_by_artist(DATA, 'Britney Spears'))
 # print(get_albums_by_title(DATA, 'Baby One More Time'))
-# print(get_albums_by_title(DATA, '42:20'))
+# print(get_albums_by_time(DATA, '40','45'))
 # print(get_total_albums_length(DATA))
 
 
