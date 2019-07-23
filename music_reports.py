@@ -1,13 +1,11 @@
 import file_handling
 
-DATA = file_handling.import_data() 
 ARTIST = 0
 ALBUM_NAME = 1
 YEAR = 2
 GENRE = 3
 LEN_OF_ALBUM = 4
 SECONDS = 60
-
 
 def get_longest_album(albums):
     max_len= 0 
@@ -88,4 +86,6 @@ def get_albums_by_time(albums, time):
 # print(get_albums_by_title(DATA, '42:20'))
 # print(get_total_albums_length(DATA))
 
+display.print_single_album(get_longest_album(DATA))
+display.print_multiple_albums(DATA)
 
