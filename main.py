@@ -42,9 +42,17 @@ while True:
         artist = input("Artist please:")
         album_name = input("Name please:")
         year = input("Year please:")
-        genre = input("Genre please:")
-        time = input("Time please:")
-        music_reports.add_record(music_reports.DATA, artist, album_name, year, genre, time)
+        if year.isnumeric():
+            genre = input("Genre please:")
+            time = input("Time please:")
+            if time.isnumeric():
+                music_reports.add_record(music_reports.DATA, artist, album_name, year, genre, time)
+            else:
+                print('----------------------------------------------------------------------------------------')
+                print("NUMERIC INPUT PLEASE!")
+        else:
+            print('----------------------------------------------------------------------------------------')
+            print("NUMERIC INPUT PLEASE!")
     elif answer == 'e':
         file_handling.export_data(music_reports.DATA, 'external_file.txt', mode="w")
     elif answer == 'q':
