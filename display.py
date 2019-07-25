@@ -35,13 +35,32 @@ def print_specific_type(albums,type):
                 print(i, ' - ', item, ' - ', amount[i], ' albums.')
                 i+=1
         ans=input('Which one do you chose? ')
-        if str.isdigit(ans):
+        if str.isdigit(ans) and int(ans)<=len(lista):
                 ans=lista[int(ans)-1]
         return ans
 
 def print_start_menu(albums):
         print("Music database")
-        print("Currently, there are ", len(albums))
+        print("Currently, there are ", len(albums), " albums")
+        year=[]
+        timem=[]
+        times=[]
+        time=[]
+        for i in range(0, len(albums)):
+                year.append(int(albums[i][2]))
+                timem.append(int(albums[i][4].split(":")[0]))
+                times.append(int(albums[i][4].split(":")[1]))
+                time.append(timem[i]*60+times[i])
+        yearmax=max(year)
+        timemax=max(time)
+        yearmin=min(year)
+        timemin=min(time)
+        maxt=[(timemax-timemax%60)/60, timemax%60]
+        mint=[(timemin-timemin%60)/60, timemin%60]
+        print("Longest album is ", int(maxt[0]),":",int(maxt[1]))
+        print("Shortest album is ", int(mint[0]),":",int(mint[1]))
+        print("Oldest album is from ", yearmin)
+        print("Most recent is from ", yearmax)
         print("* - display all albums")
         print("g - display albums by genre")
         print("t - display albums from giving time range")

@@ -3,6 +3,7 @@ import music_reports
 import display
 import time
 
+
 while True:
 
     display.print_start_menu(music_reports.DATA)
@@ -13,9 +14,10 @@ while True:
     if answer == '*':
         display.print_multiple_albums(music_reports.DATA)
     elif answer == 'g':
-        answer2 = display.print_specific_type(music_reports.DATA,3)
-        print('----------------------------------------------------------------------------------------')
-        display.print_multiple_albums(music_reports.get_albums_by_genre(music_reports.DATA, answer2))
+        answer=display.print_specific_type(music_reports.DATA,3)
+        # answer = input("Which genre? ")
+        display.print_multiple_albums(music_reports.get_albums_by_genre(music_reports.DATA, answer))
+
     elif answer == 't':
         answer = input("Album should be longer than? ")
         if answer.isnumeric():    
