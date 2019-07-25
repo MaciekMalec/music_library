@@ -1,18 +1,21 @@
 import file_handling
 import music_reports
 import display
+import time
 
 while True:
 
     display.print_start_menu(music_reports.DATA)
+    
     answer = input("What would you like to do? ")
     print('----------------------------------------------------------------------------------------')
 
     if answer == '*':
         display.print_multiple_albums(music_reports.DATA)
     elif answer == 'g':
-        answer = input("Which genre? ")
-        display.print_multiple_albums(music_reports.get_albums_by_genre(music_reports.DATA, answer))
+        answer2 = display.print_specific_type(music_reports.DATA,3)
+        print('----------------------------------------------------------------------------------------')
+        display.print_multiple_albums(music_reports.get_albums_by_genre(music_reports.DATA, answer2))
     elif answer == 't':
         answer = input("Album should be longer than? ")
         if answer.isnumeric():    
@@ -29,30 +32,35 @@ while True:
     elif answer == 'l':
         display.print_single_album(music_reports.get_longest_album(music_reports.DATA))
     elif answer == 'a':
-        answer = input("Which artist? ")
-        display.print_multiple_albums(music_reports.get_albums_by_artist(music_reports.DATA, answer))
+        answer2 = display.print_specific_type(music_reports.DATA,0)
+        print('----------------------------------------------------------------------------------------')
+        display.print_multiple_albums(music_reports.get_albums_by_artist(music_reports.DATA, answer2))
     elif answer == 'n':
-        answer = input("Which name? ")
-        display.print_multiple_albums(music_reports.get_albums_by_title(music_reports.DATA, answer))
+        answer2 = display.print_specific_type(music_reports.DATA,1)
+        print('----------------------------------------------------------------------------------------') 
+        display.print_multiple_albums(music_reports.get_albums_by_title(music_reports.DATA, answer2))
     elif answer == '-':
         answer = input("Artist please:")
         album_name = input("Name please:")
         music_reports.delete_record(music_reports.DATA, answer, album_name)
     elif answer == '+':
+        ok=False
         artist = input("Artist please:")
         album_name = input("Name please:")
-        year = input("Year please:")
-        if year.isnumeric():
-            genre = input("Genre please:")
-            time = input("Time please:")
-            if time.isnumeric():
-                music_reports.add_record(music_reports.DATA, artist, album_name, year, genre, time)
-            else:
-                print('----------------------------------------------------------------------------------------')
-                print("NUMERIC INPUT PLEASE!")
+        if album_name != '':
+            year = input("Year please:")
+            if year.isdigit() and int(year) > 0:
+                genre = input("Genre please:")
+                time_input = input("Time please:")
+                if time.strptime(time_input, '%H:%M'):
+                    # time_formated = time.strptime(time_input, '%H:%M'):
+                    music_reports.add_record(music_reports.DATA, artist, album_name, year, genre, time_input)
+                    ok=True
+        if ok:
+            print('album ', artist, album_name, year, genre, time_input,' added')
         else:
             print('----------------------------------------------------------------------------------------')
-            print("NUMERIC INPUT PLEASE!")
+            print("INVALID INPUT!")
     elif answer == 'e':
         file_handling.export_data(music_reports.DATA, 'external_file.txt', mode="w")
     elif answer == 'q':
