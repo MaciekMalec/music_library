@@ -1,5 +1,6 @@
 import file_handling
 
+DATA = file_handling.import_data()
 ARTIST = 0
 ALBUM_NAME = 1
 YEAR = 2
@@ -75,6 +76,21 @@ def get_albums_by_time(albums, timemin, timemax):
             list_of_albums.append(album)
     return list_of_albums 
 
+def delete_record(albums, artist, album_name):
+    for album in albums:
+        artist_name = album[ARTIST]
+        album_title = album[ALBUM_NAME]
+        if artist_name == artist and album_title == album_name:
+            albums.remove(album)
+            # file_handling.export_data(albums, mode="w")
+    return albums        
+
+def add_record(albums, artist, album_name, year, genre, time):
+    album = [artist, album_name, year, genre, time]
+    albums.append(album)
+    # file_handling.export_data(albums, mode="w")
+
+
     # 43:00
 
 # MOŻESZ SOBIE SPRAWDZIĆ JAK DZIAŁAJĄ TE FUNKCJE
@@ -87,6 +103,6 @@ def get_albums_by_time(albums, timemin, timemax):
 # print(get_albums_by_time(DATA, '40','45'))
 # print(get_total_albums_length(DATA))
 
-display.print_single_album(get_longest_album(DATA))
-display.print_multiple_albums(DATA)
+# display.print_single_album(get_longest_album(DATA))
+# display.print_multiple_albums(DATA)
 

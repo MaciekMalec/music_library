@@ -7,4 +7,10 @@ def import_data(filename='text_albums_data.txt'):
             albums.append(rows)
         return albums
 
-# print(import_data())
+def export_data(albums, filename='text_albums_data.txt', mode='a'):
+    if mode not in ["w", "a"]:
+        raise ValueError('Wrong write mode')
+    with open(filename, mode) as f:
+        for line in albums:
+            row = ",".join(line)
+            f.write(row + "\n") 

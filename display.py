@@ -12,10 +12,13 @@ def print_start_menu(albums):
         print("g - display albums by genre")
         print("t - display albums from giving time range")
         print("s - display shortest album")
-        print("s - display longest album")
+        print("l - display longest album")
         print("a - display albums by artist")
         print("n - display albums by name")
-        print("v - view playlist")
+        print("- - delete an album")
+        print("+ - add an album")
+        print("e - save album to external file")
+        print("q - exit program")
 
 def print_add_playlist():
         print("Would you like to add this track to playlist?")
