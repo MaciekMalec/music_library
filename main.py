@@ -42,10 +42,13 @@ while True:
         print('----------------------------------------------------------------------------------------') 
         display.print_multiple_albums(music_reports.get_albums_by_title(music_reports.DATA, answer2))
     elif answer == '-':
-        answer = input("Artist please:")
-        album_name = input("Name please:")
-        music_reports.delete_record(music_reports.DATA, answer, album_name)
+        answer2 = ''
+        while answer2 != '0':
+            display.print_multiple_albums(music_reports.DATA)
+            answer2 = input("Number of album to remove, please or 0 to go back:")
+            music_reports.delete_record(music_reports.DATA, answer2)
     elif answer == '+':
+        display.print_multiple_albums(music_reports.DATA)
         ok=False
         artist = input("Artist please:")
         album_name = input("Name please:")
@@ -54,10 +57,16 @@ while True:
             if year.isdigit() and int(year) > 0:
                 genre = input("Genre please:")
                 time_input = input("Time please:")
-                if time.strptime(time_input, '%H:%M'):
-                    # time_formated = time.strptime(time_input, '%H:%M'):
+                try:
+                    time_formated = time.strptime(time_input, '%H:%M')
                     music_reports.add_record(music_reports.DATA, artist, album_name, year, genre, time_input)
                     ok=True
+                except: 
+                    if time_input.isdigit():
+                        time_input=':'.join([time_input,'00'])
+                        music_reports.add_record(music_reports.DATA, artist, album_name, year, genre, time_input)
+                        ok=True
+                     
         if ok:
             print('album ', artist, album_name, year, genre, time_input,' added')
         else:

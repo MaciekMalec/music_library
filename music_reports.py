@@ -76,18 +76,23 @@ def get_albums_by_time(albums, timemin, timemax):
             list_of_albums.append(album)
     return list_of_albums 
 
-def delete_record(albums, artist, album_name):
+def delete_record(albums, number):
+    i = 1
     for album in albums:
-        artist_name = album[ARTIST]
-        album_title = album[ALBUM_NAME]
-        if artist_name == artist and album_title == album_name:
+        if int(number) == i:
             albums.remove(album)
+        i += 1
+
             # file_handling.export_data(albums, mode="w")
     return albums        
 
 def add_record(albums, artist, album_name, year, genre, time):
     album = [artist, album_name, year, genre, time]
-    albums.append(album)
+    if album in albums:
+        print("Already in the music database!")
+    else:
+        albums.append(album)
+
     # file_handling.export_data(albums, mode="w")
 
 

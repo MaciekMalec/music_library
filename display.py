@@ -2,19 +2,11 @@ def print_single_album(album):
         print(' | '.join(album))
 
 def print_multiple_albums(albums):
+        i = 1
         for album in albums:
-                print(' | '.join(album))
-
+                print(i, '-', ' | '.join(album))
+                i+=1
 def print_specific_type(albums,type):
-        text=''
-        if type==0:
-                text='Author'
-        elif type==1:
-                text='Album name'
-        elif type==2:
-                text='Year'
-        elif type==3:
-                text='genre'
         i=0
         amount=[]
         amount.append(0)
